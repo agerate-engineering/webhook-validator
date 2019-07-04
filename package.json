@@ -1,0 +1,15 @@
+{
+  "name": "@AgeRateEngineering/webhook-validator",
+  "version": "1.0.0",
+  "description": "shopify webhook validator function for node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Peters",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "safe-compare": "^1.1.4"
+  }
+}
