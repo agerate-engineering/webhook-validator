@@ -66,7 +66,7 @@ export default ValidateWebhook;
 
 You can use a cloud function to be your validator endpoint. Your backend service and webhook validator can now work and scale independently from each other.
 
-Let's say you started the [new baby clothing line](https://komobebi.com) KOMOBEI ❤. On Christmas Shopify sales go through the roof due to a solid good instagram campaign that causes a sudden rush of 30,000 sales → 30,000 webhook requests to start hitting your system.
+Let's say you started the [new baby clothing line](https://komobebi.com) KOMOBEBI ❤. On Christmas Shopify sales go through the roof due to a solid good instagram campaign that causes a sudden rush of 30,000 sales → 30,000 webhook requests to start hitting your system.
 
 By separating the validator in a cloud function from your core architecture, the webhook requests can be load balanced between these scalable cloud functions. The cloud functions can either forward the valid request to your backend directly or use a queue to act as a buffer to stabilize traffic.
 
