@@ -38,7 +38,27 @@ You can verify the signature to check if the request truly came from Shopify by 
 
 Below is a generic webhook validator implementation that can be configured to validate most 3rd party service webhooks (Stripe, Slack, Square etc). In the options parameter you would pass in the name of the algorithm (ex. ‘sha256’), the encoding method (ex. ‘utf8’) and the name of the name hmacHeader (ex. ‘X-Shopify-Hmac-Sha256’*)*
 
-<iframe src="https://medium.com/media/a81298f03d822795e57770ad099e7b11" frameborder=0></iframe>
+``` 
+const crypto = require('crypto');
+const safeCompare = require('safe-compare');
+const ValidateWebhook = async (request, secret, options) => {
+    console.debug(`validating incoming webhook.`);
+const { algorithm, encoding, hmacHeader } = options;
+const hmacHeaderValue = request.get(hmacHeader);
+const body = request.rawBody;
+const generatedHash = crypto
+        .createHmac(algorithm, secret)
+        .update(body, encoding)
+        .digest('base64');
+if (!safeCompare(generatedHash, hmacHeaderValue)) {
+        const ip = request.ip;
+        const userAgent = request.get('User-Agent');
+        throw new Error(`generated hash !== match hmac header, ${ip} : ${userAgent}`);
+    }
+}
+export default ValidateWebhook;
+
+```
 
 ## **Good Practices**
 
